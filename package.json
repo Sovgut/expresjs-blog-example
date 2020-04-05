@@ -1,0 +1,17 @@
+{
+  "name": "express-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ."
+  },
+  "author": "Sergey Sovgut",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "5.0.0-alpha.8",
+    "faker": "^4.1.0",
+    "helmet": "^3.22.0",
+    "normalize.css": "^8.0.1"
+  }
+}
