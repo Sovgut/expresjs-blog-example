@@ -11,6 +11,10 @@ async function boot() {
     updateControls({ singlePost: hasId, postId });
 }
 
+/**
+ * Change state of controls in header
+ * @param {{ isSinglePost: boolean, postId: number }} - state options 
+ */
 function updateControls({ singlePost, postId }) {
     const $left = document.querySelector('.controls .left');
     const $right = document.querySelector('.controls .right');
