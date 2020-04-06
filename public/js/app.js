@@ -1,5 +1,5 @@
 async function boot() {
-    const [_, postId] = window.location.search.replace('?', '').split('=');
+    const [_, postId] = window.location.search.split('=');
     const hasId = isNaN(Number(postId)) ? false : true;
 
     if (!hasId) {
