@@ -1,9 +1,5 @@
-const API_POSTS = '/api/posts';
 const TITLE_TAG = 'h1';
 const DESC_TAG = 'p';
-const HTTP_HEADERS = {
-    'Content-Type': 'application/json',
-};
 
 async function boot() {
     const [_, postId] = window.location.search.replace('?', '').split('=');
@@ -16,75 +12,6 @@ async function boot() {
     }
 
     updateControls({ singlePost: !loadAll, postId });
-}
-
-async function findAllPosts() {
-    try {
-        const response = await fetch(API_POSTS);
-        if (!response.ok) throw Error('Posts not found');
-
-        const posts = await response.json();
-        posts.reverse().forEach(post => generatePost({ ...post, useLink: true, }));
-
-    } catch (error) {
-        console.error(error);
-    }
-}
-
-/**
- * @param {number} postId
- */
-async function findOnePost(postId) {
-    try {
-        const response = await fetch(`${API_POSTS}/${postId}`);
-        if (!response.ok) throw Error('Post not found');
-
-        const post = await response.json();
-        generatePost({ ...post, isSinglePost: true });
-
-    } catch (error) {
-        window.location.href = '/';
-    }
-}
-
-async function createPost(post) {
-    try {
-        await fetch(API_POSTS, {
-            method: 'POST',
-            headers: HTTP_HEADERS,
-            body: JSON.stringify(post),
-        });
-
-        window.location.reload();
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-async function updatePost(post) {
-    try {
-        await fetch(`${API_POSTS}/${post.id}`, {
-            method: 'PATCH',
-            headers: HTTP_HEADERS,
-            body: JSON.stringify(post),
-        });
-
-        window.location.reload();
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-async function removePost(postId) {
-    try {
-        await fetch(`${API_POSTS}/${postId}`, {
-            method: 'DELETE',
-        });
-
-        window.location.reload();
-    } catch (error) {
-        console.log(error);
-    }
 }
 
 /**
