@@ -25,7 +25,7 @@ async function findOnePost(id) {
         if (!response.ok) throw Error('Post not found');
 
         const post = await response.json();
-        generatePost({ ...post, isSinglePost: true });
+        generatePost(post);
 
     } catch (error) {
         window.location.href = '/';
