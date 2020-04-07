@@ -38,6 +38,9 @@ function updateControls({ singlePost, postId }) {
     const $right = document.querySelector('.controls .right');
 
     if (!singlePost) {
+        const $create = $right.querySelector('.createPost');
+        $create.addEventListener('click', () => generateEditor());
+        
         $left.querySelector('a').remove();
     }
 
