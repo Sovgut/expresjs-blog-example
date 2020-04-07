@@ -12,17 +12,21 @@ async function boot() {
 }
 
 /**
- * @returns {{ [x:string]: string }} - object from url parameter
+ * @returns {{ [x:string]: string[] }} - objects from url parameter
  */
 function readWindowQuery() {
-    const query = window.location.search.replace('?', '');
-    
-    if (query.length > 0) {
-        const [key, value] = query.split('=');
-        return { [key]: value };
+    const rawQuery = window.location.search.replace('?', '');
+    const queries = rawQuery.split('&');
+    const result = {};
+
+    for (const query of queries) {
+        if (query.length > 0) {
+            const [key, value] = query.split('=');
+            result[key] = value;
+        }
     }
 
-    return {};
+    return result;
 }
 
 /**
