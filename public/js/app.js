@@ -12,7 +12,7 @@ async function boot() {
 }
 
 /**
- * @returns {{ [x:string]: string[] }} - objects from url parameter
+ * @returns {{ [x:string]: string }} - objects from url parameter
  */
 function readWindowQuery() {
     const rawQuery = window.location.search.replace('?', '');
