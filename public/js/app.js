@@ -1,14 +1,28 @@
 async function boot() {
-    const [_, postId] = window.location.search.split('=');
-    const hasId = isNaN(Number(postId)) ? false : true;
+    const query = readWindowQuery();
+    const hasId = isNaN(Number(query.p)) ? false : true;
 
     if (!hasId) {
         await findAllPosts();
     } else {
-        await findOnePost(postId);
+        await findOnePost(query.p);
     }
 
-    updateControls({ singlePost: hasId, postId });
+    updateControls({ singlePost: hasId, postId: query.p});
+}
+
+/**
+ * @returns {{ [x:string]: string }} - object from url parameter
+ */
+function readWindowQuery() {
+    const query = window.location.search.replace('?', '');
+    
+    if (query.length > 0) {
+        const [key, value] = query.split('=');
+        return { [key]: value };
+    }
+
+    return {};
 }
 
 /**
@@ -43,7 +57,7 @@ function updateControls({ singlePost, postId }) {
                     $post.remove();
                 },
             },
-        })
+        });
 
         const $remove = createElement({
             tag: 'div',
