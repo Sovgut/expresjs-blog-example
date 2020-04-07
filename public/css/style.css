@@ -121,7 +121,7 @@ textarea.desc {
 }
 
 .copyright {
-    color: rgba(0, 0, 0, .5);
+    color: var(--foreground);
 }
 
 .copyright a {
