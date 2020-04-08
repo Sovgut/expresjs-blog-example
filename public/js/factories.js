@@ -14,19 +14,20 @@ const GENERATE_EDITOR_DEFAULT_PARAMS = {
 
 /**
  * Generate post in DOM tree
- * @param {{
-*  id: number,
+ * @param {{  id: number,
 *  title: string,
 *  desc: string,
 *  useLink: boolean,
 * }} - post and options
+*
+* @returns {void}
 */
 function generatePost({ id, title, desc, useLink } = GENERATE_POST_DEFAULT_PARAMS) {
     const $parent = document.body.querySelector('#app .posts');
 
     if ($parent) {
-        const $post = createElement({ 
-            tag: useLink ? 'a' : 'div', 
+        const $post = createElement({
+            tag: useLink ? 'a' : 'div',
             classList: ['post'],
             id: `post-${id}`,
             link: useLink ? `/?p=${id}` : undefined,
@@ -53,12 +54,14 @@ function generatePost({ id, title, desc, useLink } = GENERATE_POST_DEFAULT_PARAM
 /**
 * Generate editor in DOM tree
 * @param {{
-    *  id: number,
-    *  title: string,
-    *  desc: string,
-    *  isSinglePost: boolean
-    * }} - post and options
-    */
+*  id: number,
+*  title: string,
+*  desc: string,
+*  isSinglePost: boolean
+* }} - post and options
+*
+* @returns {void}
+*/
 function generateEditor({ id, title, desc, isSinglePost } = GENERATE_EDITOR_DEFAULT_PARAMS) {
     const $posts = document.querySelector('#app .posts');
     if ($posts) {
@@ -125,8 +128,8 @@ function generateEditor({ id, title, desc, isSinglePost } = GENERATE_EDITOR_DEFA
 *      name: string,
 *      action: () => Promise<void>
 *  }
-* }} - element options 
-* 
+* }} - element options
+*
 * @returns {HTMLElement}
 */
 function createElement({ tag, id, classList, link, content, placeholder, isInteractive, event }) {

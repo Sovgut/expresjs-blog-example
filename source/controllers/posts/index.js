@@ -1,6 +1,13 @@
 const { database } = require('../../database');
 
-exports.findAll = (request, response) => {
+/**
+ * @async
+ * @param {Express.Request} request
+ * @param {Express.Response} response
+ *
+ * @returns {Express.Response}
+ */
+exports.findAll = async (request, response) => {
     const posts = [...database];
     if (posts && posts.length > 0) {
         return response.status(200).json(posts);
@@ -9,7 +16,14 @@ exports.findAll = (request, response) => {
     return response.status(404).send();
 }
 
-exports.findOne = (request, response) => {
+/**
+ * @async
+ * @param {Express.Request} request
+ * @param {Express.Response} response
+ *
+ * @returns {Express.Response}
+ */
+exports.findOne = async (request, response) => {
     const { postId } = request.params;
     if (isNaN(Number(postId))) {
         return response.status(400).send();
@@ -23,7 +37,14 @@ exports.findOne = (request, response) => {
     return response.status(404).send();
 }
 
-exports.create = (request, response) => {
+/**
+ * @async
+ * @param {Express.Request} request
+ * @param {Express.Response} response
+ *
+ * @returns {Express.Response}
+ */
+exports.create = async (request, response) => {
     const { title, desc } = request.body;
     if (!title || !desc) {
         return response.status(400).send();
@@ -36,7 +57,14 @@ exports.create = (request, response) => {
     return response.status(201).json(post);
 }
 
-exports.destroy = (request, response) => {
+/**
+ * @async
+ * @param {Express.Request} request
+ * @param {Express.Response} response
+ *
+ * @returns {Express.Response}
+ */
+exports.destroy = async (request, response) => {
     const { postId } = request.params;
     if (isNaN(Number(postId))) {
         return response.statu(400).send();
@@ -51,7 +79,14 @@ exports.destroy = (request, response) => {
     return response.status(404).send();
 }
 
-exports.update = (request, response) => {
+/**
+ * @async
+ * @param {Express.Request} request
+ * @param {Express.Response} response
+ *
+ * @returns {Express.Response}
+ */
+exports.update = async (request, response) => {
     const { postId } = request.params;
     const { title, desc } = request.body;
     if (isNaN(Number(postId)) || !title || !desc) {

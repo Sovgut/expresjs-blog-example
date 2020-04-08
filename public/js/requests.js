@@ -3,6 +3,10 @@ const HTTP_HEADERS = {
     'Content-Type': 'application/json',
 };
 
+/**
+ * @async
+ * @returns {void}
+ */
 async function findAllPosts() {
     try {
         const response = await fetch(API_POSTS);
@@ -10,14 +14,15 @@ async function findAllPosts() {
 
         const posts = await response.json();
         posts.reverse().forEach(post => generatePost({ ...post, useLink: true, }));
-
     } catch (error) {
         console.error(error);
     }
 }
 
 /**
+ * @async
  * @param {number} id
+ * @returns {void}
  */
 async function findOnePost(id) {
     try {
@@ -33,7 +38,9 @@ async function findOnePost(id) {
 }
 
 /**
- * @param {{ title: string, desc: string }} post 
+ * @async
+ * @param {{ title: string, desc: string }} post
+ * @returns {void}
  */
 async function createPost(post) {
     try {
@@ -50,7 +57,7 @@ async function createPost(post) {
 }
 
 /**
- * @param {{ title: string, desc: string }} post 
+ * @param {{ title: string, desc: string }} post
  */
 async function updatePost(post) {
     try {
@@ -67,7 +74,9 @@ async function updatePost(post) {
 }
 
 /**
- * @param {number} id 
+ * @async
+ * @param {number} id
+ * @returns {void}
  */
 async function removePost(id) {
     try {

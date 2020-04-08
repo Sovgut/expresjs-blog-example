@@ -1,3 +1,7 @@
+/**
+ * @async
+ * @returns {void}
+ */
 async function boot() {
     const query = readWindowQuery();
     const hasId = isNaN(Number(query.p)) ? false : true;
@@ -8,7 +12,7 @@ async function boot() {
         await findOnePost(query.p);
     }
 
-    updateControls({ singlePost: hasId, postId: query.p});
+    updateControls({ singlePost: hasId, postId: query.p });
 }
 
 /**
@@ -31,7 +35,8 @@ function readWindowQuery() {
 
 /**
  * Change state of controls in header
- * @param {{ isSinglePost: boolean, postId: number }} - state options 
+ * @param {{ isSinglePost: boolean, postId: number }} - state options
+ * @returns {void}
  */
 function updateControls({ singlePost, postId }) {
     const $left = document.querySelector('.controls .left');
@@ -40,7 +45,7 @@ function updateControls({ singlePost, postId }) {
     if (!singlePost) {
         const $create = $right.querySelector('.createPost');
         $create.addEventListener('click', () => generateEditor());
-        
+
         $left.querySelector('a').remove();
     }
 
@@ -60,7 +65,7 @@ function updateControls({ singlePost, postId }) {
                         desc: $post.querySelector('.desc').textContent,
                         isSinglePost: true,
                     });
-        
+
                     $post.remove();
                 },
             },
@@ -72,8 +77,8 @@ function updateControls({ singlePost, postId }) {
             content: 'remove post',
             event: {
                 name: 'click',
-                action: async () => confirm('You are sure?') 
-                    ? await removePost(postId) 
+                action: async () => confirm('You are sure?')
+                    ? await removePost(postId)
                     : void 0,
             },
         })
